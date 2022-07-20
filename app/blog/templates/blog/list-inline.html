@@ -1,0 +1,35 @@
+<!-- <li><a href="{{ blog_post.get_absolute_url }}"">{{ blog_post.title }}</a></li> -->
+
+<!-- <div class="card mb-4">
+    <div class="card-title">{{ blog_post.title }}</div>
+    <div class="card-text">{{ blog_post.content }}</div>
+</div> -->
+{% load static %}
+<div class="col-md-4">
+    <div class="card mb-4 {% if not blog_post.publish_date %} bg-dark text-light {% endif %}" style="width: 18rem;">
+        
+        {% if blog_post.image %}
+        <a href="{{ blog_post.get_absolute_url }}">
+            <img src="{{ blog_post.image.url }}" class="card-img-top" alt="...">    
+        </a>
+        {% else %}
+            <a href="{{ blog_post.get_absolute_url }}">
+                <img src="{% static 'image/placeholder.jpg' %}" class="card-img-top" alt="...">
+            </a>
+        {% endif %}
+            
+        <div class="card-body">
+            <h5 class="card-title">{{ blog_post.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ user.username  }} - <small >{{ blog_post.publish_date }}</small></h6>
+            
+            {% if truncate %}
+                <p class="card-text">{{ blog_post.content|linebreaks|truncatewords:35 }}</p>
+            {% else %}
+                <p class="card-text">{{ blog_post.content|linebreaks }}</p>
+            {% endif %}
+                
+            {% if not blog_post.publish_date %} Draft {% endif %}
+            <a href="{{ blog_post.get_absolute_url }}" class="card-link">Voir Plus</a>
+        </div>
+    </div>
+</div>

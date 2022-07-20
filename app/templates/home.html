@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+    <div class="row">
+        <h1>{{ title }}</h1>
+
+        {% if user.is_authenticated %}
+
+            <h3>User Custom data</h3>
+            {% for a in my_list %}
+                {% include 'blog/list-inline.html' with blog_post=a truncate=True %}
+            {% endfor %}
+
+        {% endif %}
+    </div>
+
+{% endblock %}
